@@ -1,7 +1,7 @@
 import 'dart:isolate';
 import 'dart:convert';
 import 'dart:io';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 import 'dart:async';
 
 Future<void> main(List<String> arguments) async {
@@ -335,101 +335,101 @@ hello
   // 6 event queue
 
   // 2)
-  try {
-    final url = 'https://jsonplaceholder.typicode.com/comments';
-    final parsedUrl = Uri.parse(url);
-    final response = await http.get(parsedUrl);
-    final statusCode = response.statusCode;
-    if (statusCode == 200) {
-      final rawJsonString = response.body;
-      final jsonMap = jsonDecode(rawJsonString);
-      print(jsonMap.runtimeType);
-      // Comment todo = Comment(jsonMap);
-      // print(todo);
-    } else {
-      throw HttpException('$statusCode');
-    }
-  } on SocketException catch (error) {
-    print(error);
-  } on HttpException catch (error) {
-    print(error);
-  } on FormatException catch (error) {
-    print(error);
-  }
-}
+//   try {
+//     final url = 'https://jsonplaceholder.typicode.com/comments';
+//     final parsedUrl = Uri.parse(url);
+//     final response = await http.get(parsedUrl);
+//     final statusCode = response.statusCode;
+//     if (statusCode == 200) {
+//       final rawJsonString = response.body;
+//       final jsonMap = jsonDecode(rawJsonString);
+//       print(jsonMap.runtimeType);
+//       // Comment todo = Comment(jsonMap);
+//       // print(todo);
+//     } else {
+//       throw HttpException('$statusCode');
+//     }
+//   } on SocketException catch (error) {
+//     print(error);
+//   } on HttpException catch (error) {
+//     print(error);
+//   } on FormatException catch (error) {
+//     print(error);
+//   }
+// }
 
-/*
-void main() {
-  print('1 synchronous');
-  Future(() => print('2 event queue')).then(
-    (value) => print('3 synchronous'),
-  );
-  Future.microtask(() => print('4 microtask queue'));
-  Future.microtask(() => print('5 microtask queue'));
-  Future.delayed(
-    Duration(seconds: 1),
-    () => print('6 event queue'),
-  );
-  Future(() => print('7 event queue')).then(
-    (value) => Future(() => print('8 event queue')),
-  );
-  Future(() => print('9 event queue')).then(
-    (value) => Future.microtask(
-      () => print('10 microtask queue'),
-    ),
-  );
-  print('11 synchronous');
-}
-*/
+// /*
+// void main() {
+//   print('1 synchronous');
+//   Future(() => print('2 event queue')).then(
+//     (value) => print('3 synchronous'),
+//   );
+//   Future.microtask(() => print('4 microtask queue'));
+//   Future.microtask(() => print('5 microtask queue'));
+//   Future.delayed(
+//     Duration(seconds: 1),
+//     () => print('6 event queue'),
+//   );
+//   Future(() => print('7 event queue')).then(
+//     (value) => Future(() => print('8 event queue')),
+//   );
+//   Future(() => print('9 event queue')).then(
+//     (value) => Future.microtask(
+//       () => print('10 microtask queue'),
+//     ),
+//   );
+//   print('11 synchronous');
+// }
+// */
 
-/*
-Future<void> main() async {
-  print('Before the future');
+// /*
+// Future<void> main() async {
+//   print('Before the future');
 
-  final value = await Future<int>.delayed(
-    Duration(seconds: 1),
-    () => 42,
-  );
+//   final value = await Future<int>.delayed(
+//     Duration(seconds: 1),
+//     () => 42,
+//   );
 
-  print('Value: $value');
-  print('After the future');
-}
-*/
+//   print('Value: $value');
+//   print('After the future');
+// }
+// */
 
-class Comment {
-  Comment(dynamic jsonArray) {
-    for (dynamic ele in jsonArray) {
-      com.add(ele as Comment);
-    }
-  }
+// class Comment {
+//   Comment(dynamic jsonArray) {
+//     for (dynamic ele in jsonArray) {
+//       com.add(ele as Comment);
+//     }
+//   }
 
-  List<Comment> com = [];
-}
+//   List<Comment> com = [];
+// }
 
-class Todo {
-  Todo({
-    required this.userId,
-    required this.id,
-    required this.title,
-    required this.completed,
-  });
-  factory Todo.fromJson(Map<String, Object?> jsonMap) {
-    return Todo(
-      userId: jsonMap['userId'] as int,
-      id: jsonMap['id'] as int,
-      title: jsonMap['title'] as String,
-      completed: jsonMap['completed'] as bool,
-    );
-  }
-  final int userId;
-  final int id;
-  final String title;
-  final bool completed;
-  @override
-  String toString() {
-    return 'userId: $userId\n'
-        'id: $id\n'
-        'title: $title\n'
-        'completed: $completed';
-  }
+// class Todo {
+//   Todo({
+//     required this.userId,
+//     required this.id,
+//     required this.title,
+//     required this.completed,
+//   });
+//   factory Todo.fromJson(Map<String, Object?> jsonMap) {
+//     return Todo(
+//       userId: jsonMap['userId'] as int,
+//       id: jsonMap['id'] as int,
+//       title: jsonMap['title'] as String,
+//       completed: jsonMap['completed'] as bool,
+//     );
+//   }
+//   final int userId;
+//   final int id;
+//   final String title;
+//   final bool completed;
+//   @override
+//   String toString() {
+//     return 'userId: $userId\n'
+//         'id: $id\n'
+//         'title: $title\n'
+//         'completed: $completed';
+//   }
 }
